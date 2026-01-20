@@ -17,3 +17,5 @@ results/*.csv
 .vscode/
 .idea/
 
+# Generated benchmark inputs
+data/inputs/**/*.npy
