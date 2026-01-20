@@ -1,7 +1,6 @@
 import numpy as np
 
-def run_matrix_mul(config):
-    n = config["matrix_size"]
-    a = np.random.rand(n, n)
-    b = np.random.rand(n, n)
-    _ = a @ b
+def run_matrix_mul(a: np.ndarray, b: np.ndarray) -> float:
+    c = a @ b
+    # Return a tiny scalar so nothing can be optimized away
+    return float(c[0, 0])
