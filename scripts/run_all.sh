@@ -1,6 +1,8 @@
 #!/bin/bash
-# Make sure script stops if a command fails
 set -e
+
+echo "Generating shared inputs..."
+python3 scripts/generate_inputs.py
 
 echo "Running all Python benchmarks..."
 python3 python/run_benchmark.py configs/matrix_mul.yaml
