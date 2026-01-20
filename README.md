@@ -17,9 +17,6 @@ The goals of this repository are:
 
 ```
 benchmark-rust-ml/
-├── README.md
-├── .gitignore
-├── requirements.txt
 ├── configs/
 │   ├── base.yaml
 │   ├── matrix_mul.yaml
@@ -27,19 +24,18 @@ benchmark-rust-ml/
 ├── python/
 │   ├── run_benchmark.py
 │   └── benchmarks/
-│       ├── matrix_mul.py
-│       └── reduction.py
 ├── rust/
 │   ├── Cargo.toml
 │   └── src/
-│       ├── main.rs
-│       └── benchmarks/
-│           ├── matrix_mul.rs
-│           └── reduction.rs
 ├── results/
 │   └── .gitkeep
-└── scripts/
-    └── run_all.sh
+├── scripts/
+│   └── run_all.sh
+├── .gitignore
+├── README.md
+├── LICENSE
+└── requirements.txt
+
 ```
 
 - **configs/** – YAML files with base settings and benchmark-specific parameters.
