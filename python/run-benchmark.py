@@ -15,14 +15,21 @@ def set_thread_limits(n):
 
 
 def main(config_path):
+    # Load benchmark-specific config
     with open(config_path) as f:
         config = yaml.safe_load(f)
 
+    # Load base config
     with open("configs/base.yaml") as f:
         base = yaml.safe_load(f)
 
+    # Merge configs (benchmark overrides base)
     config = {**base, **config}
 
+    # Ensure results folder exists
+    os.makedirs(config["output_dir"], exist_ok=True)
+
+    # Set thread limits
     set_thread_limits(config["num_threads"])
 
     benchmark = config["benchmark"]
@@ -43,12 +50,27 @@ def main(config_path):
         if run_id >= config["warmup_runs"]:
             results.append(elapsed)
 
+    # CSV output with extra metadata
     output_path = f'{config["output_dir"]}/python_{benchmark}.csv'
     with open(output_path, "w", newline="") as f:
         writer = csv.writer(f)
-        writer.writerow(["run", "time_sec"])
+        # Write headers
+        headers = ["run", "time_sec", "num_threads"]
+        # Add benchmark-specific params
+        if benchmark == "matrix_mul":
+            headers.append("matrix_size")
+        elif benchmark == "reduction":
+            headers.append("vector_size")
+        writer.writerow(headers)
+
+        # Write data
         for i, t in enumerate(results):
-            writer.writerow([i, t])
+            row = [i, t, config["num_threads"]]
+            if benchmark == "matrix_mul":
+                row.append(config["matrix_size"])
+            elif benchmark == "reduction":
+                row.append(config["vector_size"])
+            writer.writerow(row)
 
     print(f"Results written to {output_path}")
 
