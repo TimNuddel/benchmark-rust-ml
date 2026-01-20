@@ -4,14 +4,16 @@ use rayon::ThreadPoolBuilder;
 use serde::Deserialize;
 use std::env;
 use std::fs::File;
-use std::time::Instant;
 
-#[derive(Deserialize)]
-struct BaseConfig {
-    runs: usize,
-    warmup_runs: usize,
-    num_threads: usize,
-    output_dir: String,
+#[derive(Deserialize, Clone)]
+pub struct BaseConfig {
+    pub num_inputs: usize,
+    pub runs_per_input: usize,
+    pub warmup_runs: usize,
+    pub seed: u64,
+    pub input_dir: String,
+    pub num_threads: usize,
+    pub output_dir: String,
 }
 
 fn main() {
@@ -25,7 +27,5 @@ fn main() {
         .build_global()
         .unwrap();
 
-    let start = Instant::now();
     benchmarks::dispatch(&config_path, &base);
-    println!("Finished in {:?}", start.elapsed());
 }
