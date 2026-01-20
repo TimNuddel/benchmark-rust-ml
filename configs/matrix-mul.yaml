@@ -1,0 +1,2 @@
+benchmark: matrix_mul
+matrix_size: 1024
