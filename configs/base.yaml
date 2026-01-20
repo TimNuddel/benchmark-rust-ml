@@ -1,4 +1,14 @@
-runs: 20
-warmup_runs: 5
+# Benchmark repetition and input control
+num_inputs: 20          # Number of distinct inputs (K)
+runs_per_input: 5       # Repetitions per input (R)
+warmup_runs: 5          # Warmup runs (not recorded)
+
+# Reproducibility
+seed: 12345
+input_dir: data/inputs
+
+# Resource controls
 num_threads: 4
+
+# Output
 output_dir: results
