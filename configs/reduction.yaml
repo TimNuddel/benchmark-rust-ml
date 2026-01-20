@@ -1,0 +1,2 @@
+benchmark: reduction
+vector_size: 10000000
