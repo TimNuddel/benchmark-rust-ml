@@ -1,0 +1,4 @@
+runs: 20
+warmup_runs: 5
+num_threads: 4
+output_dir: results
